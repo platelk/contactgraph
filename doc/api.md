@@ -5,7 +5,7 @@
 ### Create
 
 ```shell
-❯ http POST :8080/v1/user nick_name=vink phone_number='+1 123 456 789 00' -v                                                                                                                             05:15:06
+❯ http POST :8080/v1/user nick_name=vink phone_number='+1 123 456 789 00' -v 
 POST /v1/user HTTP/1.1
 Accept: application/json, */*
 Accept-Encoding: gzip, deflate
@@ -37,7 +37,7 @@ Date: Sun, 19 Dec 2021 05:15:24 GMT
 ### Update
 
 ```shell
-http PUT :8080/v1/user id:=0 phone_number='+1 123 456 789 42' -v                                                                                                                                       05:16:49
+http PUT :8080/v1/user id:=0 phone_number='+1 123 456 789 42' -v 
 PUT /v1/user HTTP/1.1
 Accept: application/json, */*
 Accept-Encoding: gzip, deflate
@@ -70,7 +70,7 @@ Date: Sun, 19 Dec 2021 05:18:25 GMT
 ### Search
 
 ```shell
- http :8080/v1/users nick_name==vink -v                                                                                                                                                                 05:19:19
+ http :8080/v1/users nick_name==vink -v 
 GET /v1/users?nick_name=vink HTTP/1.1
 Accept: */*
 Accept-Encoding: gzip, deflate
@@ -99,7 +99,7 @@ Date: Sun, 19 Dec 2021 05:19:32 GMT
 ### Delete
 
 ```shell
-❯ http DELETE :8080/v1/user id:=0 -v                                                                                                                                                                     05:19:32
+❯ http DELETE :8080/v1/user id:=0 -v 
 DELETE /v1/user HTTP/1.1
 Accept: application/json, */*
 Accept-Encoding: gzip, deflate
@@ -133,7 +133,7 @@ Date: Sun, 19 Dec 2021 05:20:22 GMT
 ### Connect
 
 ```shell
-http POST :8080/v1/contact from:=0 to:=1 -v                                                                                                                                                            05:22:10
+http POST :8080/v1/contact from:=0 to:=1 -v
 POST /v1/contact HTTP/1.1
 Accept: application/json, */*
 Accept-Encoding: gzip, deflate
@@ -159,7 +159,7 @@ Date: Sun, 19 Dec 2021 05:22:29 GMT
 ### Lookup
 
 ```shell
-❯ http :8080/v1/contact/1 -v                                                                                                                                                                             05:22:30
+❯ http :8080/v1/contact/1 -v 
 GET /v1/contact/1 HTTP/1.1
 Accept: */*
 Accept-Encoding: gzip, deflate
@@ -188,7 +188,7 @@ Date: Sun, 19 Dec 2021 05:23:15 GMT
 ### Reverse lookup
 
 ```shell
-❯ http :8080/v1/contact/1/reverse -v                                                                                                                                                                     05:24:55
+❯ http :8080/v1/contact/1/reverse -v
 GET /v1/contact/1/reverse HTTP/1.1
 Accept: */*
 Accept-Encoding: gzip, deflate
@@ -223,7 +223,7 @@ Date: Sun, 19 Dec 2021 05:24:59 GMT
 ### Suggest
 
 ```shell
-❯ http :8080/v1/contact/1/suggest -v                                                                                                                                                                     05:25:13
+❯ http :8080/v1/contact/1/suggest -v
 GET /v1/contact/1/suggest HTTP/1.1
 Accept: */*
 Accept-Encoding: gzip, deflate
@@ -255,7 +255,7 @@ Date: Sun, 19 Dec 2021 05:26:11 GMT
 ### Stats
 
 ```shell
-❯ http :8080/v1/dev/stats -v                                                                                                                                                                             05:26:41
+❯ http :8080/v1/dev/stats -v
 GET /v1/dev/stats HTTP/1.1
 Accept: */*
 Accept-Encoding: gzip, deflate

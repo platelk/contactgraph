@@ -21,7 +21,15 @@ docker build -t contatcgraph .
 All the test are based on golang test package:
 
 ```
-go test .
+go test -v ./...
+```
+
+## Benchmark
+
+All the benchmark are based on golang benchmarking toolings:
+
+```shell
+go test -v -bench=. ./...
 ```
 
 ## Run
