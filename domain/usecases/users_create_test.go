@@ -16,8 +16,8 @@ func TestSetupCreate_OK(t *testing.T) {
 	create := usecases.SetupCreateUser(logger.Logger{}, userstore.NewInMemory())
 	res, err := create(context.Background(), &usecases.UserCreateReq{
 		NickName:    "test",
-		PhoneNumber: "+33 93 934 8893",
+		PhoneNumber: "+1 123 456 789 00",
 	})
 	require.NoError(t, err)
-	require.Equal(t, res.User.PhoneNumber, users.PhoneNumber("33939348893"))
+	require.Equal(t, res.User.PhoneNumber, users.PhoneNumber("112345678900"))
 }

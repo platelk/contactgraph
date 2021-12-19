@@ -16,6 +16,10 @@ func (b *Builder) WithV1UpdateUser(updateUser usecases.UpdateUser) *Builder {
 		req, status, err := parseUpdateRequest(request)
 		if err != nil {
 			writer.WriteHeader(status)
+			_, err = writer.Write([]byte(err.Error()))
+			if err != nil {
+				b.log.Error().Err(err).Msg("can't write response.")
+			}
 			return
 		}
 		res, err := updateUser(request.Context(), req)

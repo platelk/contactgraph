@@ -39,7 +39,7 @@ func updateUser(repo UserUpdater) UpdateUser {
 		newUser, err := repo.Update(ctx, &users.User{
 			ID:          req.ID,
 			NickName:    req.NickName,
-			PhoneNumber: users.PhoneNumber(req.PhoneNumber),
+			PhoneNumber: users.ParsePhoneNumber(req.PhoneNumber),
 		})
 		if err != nil {
 			return nil, fmt.Errorf("can't save new user: %w", err)
@@ -52,6 +52,9 @@ func validateUpdate(log logger.Logger, updateFunc UpdateUser) UpdateUser {
 	return func(ctx context.Context, req *UserUpdateReq) (*UserUpdateResp, error) {
 		log.Debug().Interface("req", req).Msg("receive update")
 		if err := validateNickName(req.NickName); req.NickName != "" && err != nil {
+			return nil, fmt.Errorf("can't validate user: %s: %w", err.Error(), ErrInvalidUser)
+		}
+		if err := validatePhoneNumber(req.PhoneNumber); req.PhoneNumber != "" && err != nil {
 			return nil, fmt.Errorf("can't validate user: %s: %w", err.Error(), ErrInvalidUser)
 		}
 		return updateFunc(ctx, req)

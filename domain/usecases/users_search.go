@@ -50,7 +50,7 @@ func searchUser(repo UserSearcher) SearchUser {
 			qBuilder = qBuilder.ByNickName(nickName)
 		}
 		for _, phoneNumber := range req.PhoneNumbers {
-			qBuilder = qBuilder.ByPhoneNumber(users.PhoneNumber(phoneNumber))
+			qBuilder = qBuilder.ByPhoneNumber(users.ParsePhoneNumber(phoneNumber))
 		}
 
 		users, err := repo.Search(ctx, qBuilder)

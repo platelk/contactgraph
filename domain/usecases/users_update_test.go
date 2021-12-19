@@ -23,5 +23,5 @@ func TestSetupUpdate_OK(t *testing.T) {
 		PhoneNumber: "+44 020 030 042 00",
 	})
 	require.NoError(t, err)
-	require.Equal(t, res.User.PhoneNumber, users.PhoneNumber("+44 020 030 042 00"))
+	require.Equal(t, res.User.PhoneNumber, users.PhoneNumber("4402003004200"))
 }

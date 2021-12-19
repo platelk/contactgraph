@@ -5,8 +5,6 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/dongri/phonenumber"
-
 	"github.com/platelk/contactgraph/domain/models/users"
 	"github.com/platelk/contactgraph/infra/logger"
 )
@@ -43,7 +41,7 @@ func createUser(repo UserAdder) CreateUser {
 	return func(ctx context.Context, req *UserCreateReq) (*UserCreateResp, error) {
 		newUser, err := repo.Add(ctx, &users.User{
 			NickName:    req.NickName,
-			PhoneNumber: users.PhoneNumber(req.PhoneNumber),
+			PhoneNumber: users.ParsePhoneNumber(req.PhoneNumber),
 		})
 		if err != nil {
 			return nil, fmt.Errorf("can't save new user: %w", err)
@@ -55,17 +53,12 @@ func createUser(repo UserAdder) CreateUser {
 func validateCreate(createFunc CreateUser) CreateUser {
 	return func(ctx context.Context, req *UserCreateReq) (*UserCreateResp, error) {
 		err := validateUser(&users.User{
-			NickName: req.NickName,
+			NickName:    req.NickName,
+			PhoneNumber: users.PhoneNumber(req.PhoneNumber),
 		})
 		if err != nil {
 			return nil, fmt.Errorf("can't validate user: %s: %w", err.Error(), ErrInvalidUser)
 		}
-
-		parsedPhone := phonenumber.ParseWithLandLine(req.PhoneNumber, "")
-		if parsedPhone == "" {
-			return nil, fmt.Errorf("can't parse user phone number %v for country: %v", req.PhoneNumber, "unknown")
-		}
-		req.PhoneNumber = parsedPhone
 		return createFunc(ctx, req)
 	}
 }
